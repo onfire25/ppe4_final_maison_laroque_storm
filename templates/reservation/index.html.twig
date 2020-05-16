@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reservation index{% endblock %}
+
+{% block body %}
+    <div class="bg-light p-3">
+        <h1>Panier</h1>
+    </div>
+    {% if items | length > 0 %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Produit</th>
+            <th>Prix</th>
+            <th>Quantité</th>
+            <th>Total</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in items %}
+            <tr>
+                <td>{{ item.produit.libelle }}</td>
+                <td>{{ item.produit.prixht }}&nbsp;€</td>
+                <td>{{ item.quantity}}</td>
+                <td>{{ item.produit.prixht * item.quantity }}&nbsp;€</td>
+                <td>
+                    <a href="{{ path('reservation_supprimer', {'id': item.produit.id}) }}" class="btn btn-danger btn-sm">Supprimer</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="3" class="text-right">Total : </td>
+            <td>{{ total }}&nbsp;€</td>
+            <td></td>
+        </tr>
+        </tfoot>
+    </table>
+    {% else %}
+        <p>Vous n'avez rien dans votre panier.</p>
+    {% endif %}
+
+{% endblock %}
+{#    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>DateCde</th>
+                <th>FacturePdf</th>
+                <th>DateLivraison</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reservation in reservations %}
+            <tr>
+                <td>{{ reservation.id }}</td>
+                <td>{{ reservation.dateCde ? reservation.dateCde|date('Y-m-d') : '' }}</td>
+                <td>{{ reservation.facturePdf }}</td>
+                <td>{{ reservation.dateLivraison ? reservation.dateLivraison|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('reservation_show', {'id': reservation.id}) }}">show</a>
+                    <a href="{{ path('reservation_edit', {'id': reservation.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('reservation_new') }}">Create new</a>#}

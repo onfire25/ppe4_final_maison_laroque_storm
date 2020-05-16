@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+{% block title %}Liste des adresses{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+{% endblock %}
+{% block body %}
+    <div class="container-fluid">
+        <div class="row mb-4">
+            <div class="col-12 text text-center">
+                Liste des adresses
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2"></div>
+            {% for uneAdresse in lesAdresses %}
+                <div class="col-2">
+                    <div class="card bg-light mb-3" style="max-width: 18rem;">
+                        <div class="card-header">{{ uneAdresse.libelle }}</div>
+                        <div class="card-body">
+                            <p>{{ uneAdresse.codePostal }}</p>
+                            <p>{{ uneAdresse.libelle }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

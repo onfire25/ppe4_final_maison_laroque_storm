@@ -1,0 +1,99 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Presenter{% endblock %}
+
+{% block body %}
+    <div class="jumbotron">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                        {#{% if presenter.filename %}#}
+                        {#<img src="../images/presenters/{{ presenter.idImage.chemin }}" style="width: 100%; height:auto;">#}
+                        <p><img src="{{ presenter.idImage.chemin }}" width="400"></p>
+                        {#{% else %}
+                        <img src="{{ '../images/presenters/db.jpg' }}" alt="Symfony!" class="image-display" style="width: 100%; height:auto;" />
+                    {% endif %}#}
+                </div>
+                <div class="col-md-6">
+                    <br>
+                    <br>
+                    <br>
+                    <div class="row">
+                        <strong>En stock :</strong>&nbsp;&nbsp;&nbsp; {{ presenter.idProduit.stock | nl2br }}
+                    </div>
+                    <br>
+                    <div class="row">
+                        <strong>Prix :</strong>&nbsp;&nbsp;&nbsp; {{ presenter.idProduit.prixht | nl2br }} €
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="row">
+                <strong>Description :</strong>
+            </div>
+            <br>
+            <div class="row">
+                {{ presenter.idProduit.description | nl2br }}
+            </div>
+            {#<br>#}
+            {#{% for auteur in presenter.idAuteur %}#}
+            {#<div class="row">
+                <strong>Catégorie :&nbsp;</strong><br> {{ presenter.idProduit.idAssocier.idCategorie.libelle | nl2br }}
+            </div>#}
+            {#{% endfor %}#}
+            <br>
+            {#<br>
+            <div class="row">
+                <strong>Tome(s) en stock :&nbsp;</strong><br>{% for tomes in presenter.idTomes %} {{ tomes.libelle | nl2br }},{% endfor %}
+            </div>#}
+            <br>
+            {#<div class="row">
+                <strong>Magasin(s) disposant cet/ces article(s) :&nbsp;</strong><br>
+                {% for magasin in presenter.idMagasin %}
+                    <a href="{{ path('magasin.show', {id: magasin.id, slug: magasin.slug}) }}">{{ magasin.nom | nl2br }}</a>,
+                {% endfor %}
+            </div>
+            <br>#}
+            <div class="row">
+                <div class="col-md-3">&nbsp;</div>
+                <div class="col-md-3">
+                    <a href="{{ path ('afficher')}}" class="btn btn-primary">Revenir à la page presenter</a>
+                </div>
+                <div class="col-md-3">
+                    <a href="{{ path('reservation_add', {'id':  presenter.idProduit.id }) }}" class="btn btn-success">Commander</a>
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+        </div>
+    </div>
+    {#<div class="jumbotron">
+        <div class="container">
+
+        </div>
+    </div>#}
+    {#<div class="jumbotron">
+        <div class="container-fluid">
+
+        </div>
+    </div>#}
+{% endblock %}
+
+{#{% block body %}
+    <h1>Presenter</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ presenter.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('presenter_index') }}">back to list</a>
+
+    <a href="{{ path('presenter_edit', {'id': presenter.id}) }}">edit</a>
+
+    {{ include('presenter/_delete_form.html.twig') }}
+{% endblock %}#}

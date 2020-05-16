@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Atamoto - {% block title %}{% endblock %}</title>
+    <link rel="shortcut icon" href="https://images-na.ssl-images-amazon.com/images/I/51LynTJAgPL._AC_SX679_.jpgimages/photo01.jpg" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <div class="container-fluid">
+        <!-- Brand -->
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#"><img src="https://images-na.ssl-images-amazon.com/images/I/51LynTJAgPL._AC_SX679_.jpgimages/photo01.jpg" width="50px"></a>
+        </div>
+        <!-- Links -->
+        <ul class="nav navbar-nav navbar-left">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path ('afficher')}}">Magasin</a>
+            </li>
+            {% if is_granted('ROLE_USER') %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('reservation_index') }}">Panier</a>
+                </li>
+            {% endif %}
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+            {% if not is_granted('ROLE_USER') %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
+                </li>
+                <a class="nav-link" href="#">| &nbsp;</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('user_new') }}">Inscription</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <p class="nav-link">{{ app.user.email }}</p>
+                </li>
+            {% endif %}
+
+            {% if is_granted('ROLE_ADMIN') %}
+                <a class="nav-link" href="#">| &nbsp;</a>
+                {#<li class="nav-item">
+                    <a class="nav-link" href="#">Administration</a>
+                </li>#}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                        Administration
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{{ path('produit_index') }}">Gérer les produits</a>
+                    </div>
+                </li>
+            {% endif %}
+
+            {% if is_granted('ROLE_USER') %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
+                </li>
+            {% endif %}
+        </ul>
+
+        <!-- Dropdown -->
+        {#<li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                Connexion/Inscription
+            </a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="{{ path('app_login') }}">Connexion</a>
+                <a class="dropdown-item" href="{{ path ('utilisateur_new')}}">Inscription</a>
+                <a class="dropdown-item" href="{{ path ('app_logout')}}">Déconnexion</a>
+            </div>
+        </li>#}
+    </div>
+</nav>
+{% block searchBar %}{% endblock %}
+<div class="container-fluid">
+    {% block body %}{% endblock %}
+</div>
+{#<div class="footer">
+    <br/>
+    <div class="row">
+        <div class="col-md-2">&nbsp</div>
+        <div class="links col-md-8">
+            <a href="https://www.instant-gaming.com/fr/">Accueil</a><span class="ig-footer-separator">|</span>
+            <a href="https://www.instant-gaming.com/fr/les-conditions-de-vente/">Les conditions de vente</a><span class="ig-footer-separator">|</span>
+            <a href="https://www.instant-gaming.com/fr/paiement-securise/">Paiement sécurisé</a><span class="ig-footer-separator">|</span>
+            <a href="https://www.instant-gaming.com/fr/politique-de-confidentialite/">Politique de confidentialité</a><span class="ig-footer-separator">|</span>
+            <a class=" ig-contact-btn" href="https://www.instant-gaming.com/fr/nous-contacter/">Nous contacter</a><span class="ig-footer-separator">|</span>
+            <a href="https://www.instant-gaming.com/fr/redeem/">Utiliser une carte cadeau</a><span class="ig-footer-separator">|</span>
+            <a href="https://www.instant-gaming.com/fr/questions-frequemment-posees/">FAQ</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5">&nbsp</div>
+        <div id="ig-copyright">Atamoto - 2020</div>
+    </div>
+</div>#}
+<nav class="navbar navbar-expand-sm bg-secondary navbar-secondary">
+    <!-- Links -->
+    <ul class="navbar-nav">
+        <div class="col-md-10">&nbsp</div>
+        <div class="col-md-12">
+            <a href="#" class="text-white">Les conditions de vente</a><span class="ig-footer-separator">|</span>
+            <a href="#" class="text-white">Paiement sécurisé</a><span class="ig-footer-separator">|</span>
+            <a href="#" class="text-white">Politique de confidentialité</a>
+        </div>
+    </ul>
+</nav>
+{% block javascripts %}{% endblock %}
+</body>
+</html>
